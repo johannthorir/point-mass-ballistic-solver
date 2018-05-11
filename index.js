@@ -1,20 +1,22 @@
+// Copyright 2018 Jóhann Þórir Jóhannsson. All rights reserved.
 'use strict';
-/*
-   Speed of sound code based on code from: Dr Richard Lord - http://www.npl.co.uk/acoustics/techguides/speedair
-*/
+
+// Speed of sound code based on code from: Dr Richard Lord - http://www.npl.co.uk/acoustics/techguides/speedair 
 
 /* eslint-disable */ 
-/*
-    Note that this library uses metric units, mostly SI with some exceptions.
 
-    all lengthss are in metres
-    all angles are in radians
-    pressure is in hPa instead of Pa.
-    velocities are in metres pr. second.
 
-    vertical lengths are positive up, negative down.
-    bullet weights are in grains... 
-*/
+//
+//    Note that this library uses metric units, mostly SI with some exceptions.
+//
+//    all lengthss are in metres
+//    all angles are in radians
+//    pressure is in hPa instead of Pa.
+//    velocities are in metres pr. second.
+//
+//    vertical lengths are positive up, negative down.
+//    bullet weights are in kg, 
+//
 
 export default function() {
     // Some physical and converion constants.
