@@ -20,10 +20,13 @@
 
 export default function() {
     // Some physical and converion constants.
-    const POUNDS_PER_KG = 2.20462;
+    const POUNDS_PER_KG    = 2.20462;
     const INCHES_PER_METRE = 39.3701;
-    const GRAVITY = 9.822631; // correct local gravity
-    const GRAINS_PER_KG = 15432;
+    const GRAVITY          = 9.822631; // correct local gravity
+    const GRAINS_PER_KG    = 15432;
+    const KELVIN           = 273.15;
+    const R                = 8.3145; // universal gas constant J/(K Mol)
+    
     const STEP = 0.075; // m approximately - i.e. next time is how long it takes to fly this long with the current lateral velocity.
     //! G7 table, each element is
     //! [ x, y, slope to next point.]
@@ -94,13 +97,12 @@ export default function() {
             this.windAngle = windAngle;
             this.headWind = Math.cos(windAngle) * windSpeed;
             this.crossWind = Math.sin(windAngle) * windSpeed;
-            const Kelvin = 273.15;
             let T = temperature;
-            let TKel = Kelvin + T;
+            let TKel = KELVIN + T;
             let p = pressure * 100; // in Pascals
             const Md = 0.028964; // molar mass of dry air, kg/mol
             const Mv = 0.018016; // molar mass of water vapor kg/mol
-            const R = 8.314; // universal gas constant J/(K Mol)
+            
             // const Rv = 461.495;  // specific gas constant for water vapor J/(kg * K)
             // const Rd = 287.058;  // specific gas constant for dry air J(kg*K)
             let psat = 6107.8 * Math.exp(7.27 * T / TKel);
@@ -118,6 +120,16 @@ export default function() {
             let C3 = Xw * Xw * 2.835149 + p * p * 2.15e-13 - Xc * Xc * 29.179762 - 0.000486 * Xw * p * Xc;
             this.mach1 = C1 + C2 - C3;
         }
+    }
+
+    function pressureCorrection(temperature, height, pressure) {
+        const Boltzmann = 1.3806488e-27;
+        const amu = 1.66054e-27; // kg.
+        
+        let T = temperature + KELVIN; // temperature in K
+        let m = 28.95 * amu; // mean mass of dry air
+        let f = Math.exp((-m * GRAVITY * height)/(Boltzmann * T));
+        return pressure * f;
     }
 
     //! positive is in our backs.
@@ -285,6 +297,7 @@ export default function() {
     }
     
     this.EnvironmentalFactors = EnvironmentalFactors;
+    this.
     this.getEnvelope = getEnvelope;
     this.linearInterpolate = linearInterpolate;
     this.crossWind = crossWind;
