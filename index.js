@@ -296,8 +296,7 @@ export default function() {
         return { x: x, y: y };
     }
     
-    this.EnvironmentalFactors = EnvironmentalFactors;
-    this.
+    this.EnvironmentalFactors = EnvironmentalFactors;    
     this.getEnvelope = getEnvelope;
     this.linearInterpolate = linearInterpolate;
     this.crossWind = crossWind;
