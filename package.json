@@ -1,6 +1,6 @@
 {
     "name"       : "point-mass-ballistic-solver",
-    "version"    : "1.0.0",
+    "version"    : "1.2.0",
     "description": "A point-mass solver for small-arms external ballistics.",
     "keywords"   : [ "ballistics", "g1", "g7" ],
     "homepage"   : "https://github.com/johannthorir/",
