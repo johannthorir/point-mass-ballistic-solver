@@ -297,7 +297,7 @@ export default function() {
     }
     
     this.EnvironmentalFactors = EnvironmentalFactors;
-    this.
+    this.pressureCorrection = pressureCorrection;
     this.getEnvelope = getEnvelope;
     this.linearInterpolate = linearInterpolate;
     this.crossWind = crossWind;
