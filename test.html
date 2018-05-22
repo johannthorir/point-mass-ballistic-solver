@@ -1,0 +1,35 @@
+<!DOCTYPE html!>
+<html>
+    <head>
+        <script type="module">
+            import { EnvironmentalFactors, PointMassBallisticSolver } from './index.js'
+
+            var temperature = 15;
+            var pressure    = 1013.25;
+            var humidity    = 0.70;
+            var windSpeed   = 1.0;
+            var windAngle   = Math.PI / 2;
+            var envA = new EnvironmentalFactors(temperature, pressure, humidity, windSpeed, windAngle);
+            var envB = new EnvironmentalFactors(temperature - 10.0 , pressure - 20.0, humidity, windSpeed + 24, windAngle / 3);
+
+            var zeroRange = 250.0;
+            var range     = 500.0;
+            var offset    = 0.0;
+            var velocity  = 923.0;
+            var mass      = 6.5e-3;
+            var bc = 0.420;
+            var system = 'G1';
+            var reference = 0.044; 
+
+            var pmbs = new PointMassBallisticSolver();
+            var angle = pmbs.getZeroingAngle(zeroRange, offset, velocity, mass, bc, system, reference, envA);
+            var trajectory = pmbs.getTrajectory(range, angle, velocity, mass, bc, system, reference, envB); 
+            var envelope = pmbs.getEnvelope(trajectory);
+            console.log(pmbs.linearInterpolate(range, trajectory[trajectory.length-2], trajectory[trajectory.length - 1]));
+            console.log(envelope);
+        </script>
+    </head>
+    <body>
+
+    </body>
+</html>
