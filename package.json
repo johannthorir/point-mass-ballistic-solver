@@ -14,5 +14,5 @@
         "email": "johann.johannsson@gmail.com"
     },
     "private"    : false,
-    "main"       : "index.js"
+    "main"       : "lib/index.js"
 }
